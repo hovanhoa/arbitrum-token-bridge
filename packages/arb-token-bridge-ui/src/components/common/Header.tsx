@@ -216,12 +216,12 @@ export function Header() {
       <div className="flex w-full max-w-[1440px] justify-between px-8">
         <div className="flex items-center lg:space-x-2 xl:space-x-12">
           <a href="/" className="arb-hover flex shrink-0 flex-col items-center">
-            <HeaderImageElement
+            {/* <HeaderImageElement
               src={HeaderLogoMainnetSVG}
-              alt="Arbitrum logo"
-            />
+              alt="Kameleon logo"
+            /> */}
           </a>
-          <div className="hidden items-center lg:flex lg:space-x-2 xl:space-x-6">
+          {/* <div className="hidden items-center lg:flex lg:space-x-2 xl:space-x-6">
             <HeaderMenuDesktop {...learnMenuProps}>Learn</HeaderMenuDesktop>
             <HeaderMenuDesktop
               items={[
@@ -245,7 +245,7 @@ export function Header() {
             <DesktopExternalLink href={GET_HELP_LINK}>
               Get Help
             </DesktopExternalLink>
-          </div>
+          </div> */}
         </div>
         <Disclosure>
           {({ open }) => (
@@ -271,7 +271,7 @@ export function Header() {
             id="header-content-root"
             className="flex space-x-2 xl:space-x-4"
           ></div>
-          <div className="flex flex-row space-x-2 xl:space-x-4">
+          {/* <div className="flex flex-row space-x-2 xl:space-x-4">
             <ExternalLink
               href="https://discord.com/invite/ZpZuw7p"
               className="arb-hover h-8 w-8"
@@ -284,7 +284,7 @@ export function Header() {
             >
               <Image src={Twitter} alt="Twitter" />
             </ExternalLink>
-          </div>
+          </div> */}
         </div>
       </div>
     </header>

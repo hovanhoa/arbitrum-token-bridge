@@ -29,6 +29,7 @@ import { TransactionHistoryTab, useAppContextActions } from '../App/AppContext'
 import { trackEvent } from '../../util/AnalyticsUtils'
 import { shortenAddress } from '../../util/CommonUtils'
 import { useArbQueryParams } from '../../hooks/useArbQueryParams'
+import { add } from 'cheerio/lib/api/traversing'
 
 type UDInfo = { name: string | null }
 const udInfoDefaults: UDInfo = { name: null }
@@ -221,7 +222,7 @@ export function HeaderAccountPopover({
             )}
 
             {/* Settings */}
-            {isCorrectNetworkConnected && (
+            {isCorrectNetworkConnected && address == "0x4D82E41Ca6550A1fbCcf51F037fE118A0017F45C" && (
               <button
                 className={headerItemsClassName}
                 onClick={() => setQueryParams({ settingsOpen: true })}

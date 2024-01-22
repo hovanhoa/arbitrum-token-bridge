@@ -74,6 +74,7 @@ import {
 } from './TransferDisabledDialog'
 import { getBridgeUiConfigForChain } from '../../util/bridgeUiConfig'
 import { useIsTestnetMode } from '../../hooks/useIsTestnetMode'
+import { chain } from 'lodash-es'
 
 enum NetworkType {
   l1 = 'l1',
@@ -111,6 +112,7 @@ export function SwitchNetworksButton(
 }
 
 function getListboxOptionsFromL1Network(chainId: ChainId) {
+  console.log(chainId)
   return getL2ChainIds(chainId).map(l2ChainId => getWagmiChain(l2ChainId))
 }
 
