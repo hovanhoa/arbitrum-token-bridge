@@ -104,6 +104,14 @@ export function getBridgeUiConfigForChain(
         networkLogo: '/images/XaiLogo.svg',
         nativeTokenLogo: '/images/XaiLogo.svg'
       }
+      case ChainId.Kameleon:
+        return {
+          primaryColor: '#F30019',
+          secondaryColor: '#87000E',
+          networkName: 'Kameleon',
+          networkLogo: '/images/XaiLogo.svg',
+          nativeTokenLogo: '/images/XaiLogo.svg'
+        }
     case ChainId.XaiTestnet:
       return {
         primaryColor: '#F30019',

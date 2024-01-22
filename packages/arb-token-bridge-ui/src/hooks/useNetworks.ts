@@ -11,6 +11,7 @@ import {
 } from '../util/networks'
 import {
   xai,
+  kameleon,
   sepolia,
   arbitrumNova,
   arbitrumSepolia,
@@ -76,6 +77,7 @@ export function isSupportedChainId(
     arbitrumSepolia.id,
     stylusTestnet.id,
     xai.id,
+    kameleon.id,
     xaiTestnet.id,
     arbitrumLocal.id,
     local.id,

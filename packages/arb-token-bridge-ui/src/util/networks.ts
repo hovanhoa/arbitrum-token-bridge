@@ -11,6 +11,7 @@ import {
 import { loadEnvironmentVariableWithFallback } from './index'
 import { Erc20Data } from './TokenUtils'
 import { getBridgeUiConfigForChain } from './bridgeUiConfig'
+import { chain } from 'lodash-es'
 
 export const customChainLocalStorageKey = 'arbitrum:custom:chains'
 
@@ -156,9 +157,10 @@ export function getL2ChainIds(parentChainId: number): ChainId[] {
       ]
     case ChainId.ArbitrumSepolia:
       return [
-        ChainId.Sepolia,
-        ChainId.StylusTestnet,
-        ...getCustomChainIds(ChainId.ArbitrumSepolia)
+        // ChainId.Sepolia,
+        // ChainId.StylusTestnet,
+        ChainId.Kameleon
+        // ...getCustomChainIds(ChainId.ArbitrumSepolia)
       ]
     case ChainId.ArbitrumLocal:
       return [ChainId.Local, ...getCustomChainIds(ChainId.ArbitrumLocal)]
@@ -184,6 +186,7 @@ export enum ChainId {
   // Orbit Testnets
   XaiTestnet = 47279324479,
   Xai = 660279,
+  Kameleon = 2424,
   StylusTestnet = 23011913
 }
 
@@ -216,6 +219,7 @@ export const rpcURLs: { [chainId: number]: string } = {
   // Orbit Testnets
   [ChainId.XaiTestnet]: 'https://testnet.xai-chain.net/rpc',
   [ChainId.Xai]: 'https://xai-chain.net/rpc',
+  [ChainId.Kameleon]: 'https://rpc-l2-dev.kardiachain.io',
   [ChainId.StylusTestnet]: 'https://stylus-testnet.arbitrum.io/rpc'
 }
 
@@ -234,6 +238,7 @@ export const explorerUrls: { [chainId: number]: string } = {
   // Orbit Testnets
   [ChainId.XaiTestnet]: 'https://testnet-explorer.xai-chain.net',
   [ChainId.Xai]: 'https://explorer.xai-chain.net',
+  [ChainId.Kameleon]: 'https://explorer-l2-dev.kardiachain.io',
   [ChainId.StylusTestnet]: 'https://stylus-testnet-explorer.arbitrum.io'
 }
 
@@ -291,10 +296,11 @@ export const chainIdToDefaultL2ChainId: { [chainId: number]: ChainId[] } = {
   [ChainId.ArbitrumNova]: [ChainId.ArbitrumNova],
   // L2 Testnets
   [ChainId.ArbitrumGoerli]: [ChainId.ArbitrumGoerli, ChainId.XaiTestnet],
-  [ChainId.ArbitrumSepolia]: [ChainId.ArbitrumSepolia, ChainId.StylusTestnet],
+  [ChainId.ArbitrumSepolia]: [ChainId.ArbitrumSepolia, ChainId.StylusTestnet, ChainId.Kameleon],
   // Orbit Testnets
   [ChainId.XaiTestnet]: [ChainId.XaiTestnet],
   [ChainId.Xai]: [ChainId.Xai],
+  [ChainId.Kameleon]: [ChainId.Kameleon],
   [ChainId.StylusTestnet]: [ChainId.StylusTestnet]
 }
 
@@ -423,6 +429,44 @@ export const xai: Chain = {
   depositTimeout: 1800000
 }
 
+export const kameleon: Chain = {
+  chainID: ChainId.Kameleon,
+  confirmPeriodBlocks: 20,
+  ethBridge: {
+    bridge: '0x3314f4A9BdB2a125c181362982F16C6e0a02dc2A',
+    inbox: '0xb689b06c353D385661905dF238803ae1068464e9',
+    outbox: '0x5Ce6657EE08DaE345bfD74BFc7F2a29bF64Fe18C',
+    rollup: '0xFD86cB5C35CD8C7a1348E8Ff466171dD2f25B524',
+    sequencerInbox: '0xF53BfcaD2C001b81DBB6D1bcD551a756AdeD2123'
+  },
+  nativeToken: '0xebD8B40856E2cd0faE64a2d553627824E8FE665A',
+  explorerUrl: 'https://explorer-l2-dev.kardiachain.io/',
+  isArbitrum: true,
+  isCustom: true,
+  name: 'kameleon',
+  partnerChainID: ChainId.ArbitrumSepolia,
+  retryableLifetimeSeconds: 604800,
+  tokenBridge: {
+    l1CustomGateway: '0x75782346c6990985afB67e7a061F648812c66Bcc',
+    l1ERC20Gateway: '0x325BCb0F0bD5E4EA42a10b457cB62d675C9A87E6',
+    l1GatewayRouter: '0xF54ADD30c01a5b56D3B4E3aCda643C4ff64ff9fe',
+    l1MultiCall: '0xce1CAd780c529e66e3aa6D952a1ED9A6447791c1',
+    l1ProxyAdmin: '0x9864d9430246BdC8c82e65250a1De51BDDED2BAB',
+    l1Weth: '0x980B62Da83eFf3D4576C647993b0c1D7faf17c73',
+    l1WethGateway: '0x0000000000000000000000000000000000000000',
+    l2CustomGateway: '0x903DeCCCE323665605B95413Af963f6aDAcD5200',
+    l2ERC20Gateway: '0xfbfa7aef58cC917810914ce6b6e881885B1e97f3',
+    l2GatewayRouter: '0xceec07ae59EfeeC82da70AA594B7dfD0F4D54ce1',
+    l2Multicall: '0x3b36999F9c2161B72cE2F58d70aB8C5A4Eb3a317',
+    l2ProxyAdmin: '0x5cEE00a93B3f98D9c94ffEABcC7E16fbCF8d819c',
+    l2Weth: '0x0000000000000000000000000000000000000000',
+    l2WethGateway: '0x0000000000000000000000000000000000000000'
+  },
+  nitroGenesisBlock: 0,
+  nitroGenesisL1Block: 0,
+  depositTimeout: 1800000
+}
+
 export type RegisterLocalNetworkParams = {
   l1Network: L1Network
   l2Network: L2Network
@@ -481,6 +525,7 @@ export function isNetwork(chainId: ChainId) {
   const isArbitrumLocal = chainId === ChainId.ArbitrumLocal
 
   const isXai = chainId === ChainId.Xai
+  const isKameleon = chainId === ChainId.Kameleon
 
   const isXaiTestnet = chainId === ChainId.XaiTestnet
   const isStylusTestnet = chainId === ChainId.StylusTestnet
@@ -505,6 +550,7 @@ export function isNetwork(chainId: ChainId) {
     isSepolia ||
     isArbitrumSepolia ||
     isXaiTestnet ||
+    isKameleon ||
     isStylusTestnet ||
     isCustomOrbitChain
 
@@ -518,6 +564,7 @@ export function isNetwork(chainId: ChainId) {
     isArbitrumSepolia ||
     isStylusTestnet ||
     isXai ||
+    isKameleon ||
     isXaiTestnet // is network supported on bridge
 
   return {
@@ -537,6 +584,7 @@ export function isNetwork(chainId: ChainId) {
     // Orbit chains
     isOrbitChain: !isEthereumMainnetOrTestnet && !isArbitrum,
     isXai,
+    isKameleon,
     isXaiTestnet,
     isStylusTestnet,
     // Testnet
@@ -552,20 +600,21 @@ export function getNetworkName(chainId: number) {
 
 export function getSupportedNetworks(chainId = 0, includeTestnets = false) {
   const testnetNetworks = [
-    ChainId.Goerli,
-    ChainId.ArbitrumGoerli,
-    ChainId.Sepolia,
+    // ChainId.Goerli,
+    // ChainId.ArbitrumGoerli,
+    // ChainId.Sepolia,
     ChainId.ArbitrumSepolia,
-    ChainId.XaiTestnet,
-    ChainId.StylusTestnet,
+    // ChainId.XaiTestnet,
+    // ChainId.StylusTestnet,
     ...getCustomChainsFromLocalStorage().map(chain => chain.chainID)
   ]
 
   const mainnetNetworks = [
-    ChainId.Ethereum,
-    ChainId.ArbitrumOne,
-    ChainId.ArbitrumNova,
-    ChainId.Xai
+    // ChainId.Ethereum,
+    // ChainId.ArbitrumOne,
+    // ChainId.ArbitrumNova,
+    // ChainId.Xai,
+    ChainId.Kameleon
   ]
 
   return isNetwork(chainId).isTestnet

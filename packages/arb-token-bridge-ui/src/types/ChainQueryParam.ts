@@ -17,6 +17,7 @@ const chainQueryParams = [
   'arbitrum-goerli',
   'arbitrum-sepolia',
   'xai',
+  'kameleon',
   'stylus-testnet',
   'xai-testnet',
   'custom-localhost',
@@ -51,6 +52,9 @@ export function getChainQueryParamForChain(chainId: ChainId): ChainQueryParam {
 
     case ChainId.Xai:
       return 'xai'
+
+    case ChainId.Kameleon:
+      return 'kameleon'
 
     case ChainId.ArbitrumGoerli:
       return 'arbitrum-goerli'
@@ -110,6 +114,9 @@ export function getChainForChainKeyQueryParam(
 
     case 'xai':
       return customChains.xai
+
+    case 'kameleon':
+      return customChains.kameleon
 
     case 'arbitrum-goerli':
       return chains.arbitrumGoerli

@@ -121,6 +121,10 @@ const multiChainFetchList: ChainPair[] = [
     chain: ChainId.Xai
   },
   {
+    parentChain: ChainId.ArbitrumSepolia,
+    chain: ChainId.Kameleon
+  },
+  {
     parentChain: ChainId.ArbitrumGoerli,
     chain: ChainId.XaiTestnet
   },

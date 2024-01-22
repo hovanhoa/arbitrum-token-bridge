@@ -119,6 +119,31 @@ export const xai: Chain = {
   }
 }
 
+export const kameleon: Chain = {
+  id: ChainId.Kameleon,
+  name: 'kameleon',
+  network: 'kameleon',
+  nativeCurrency: {
+    name: 'Kameleon',
+    symbol: 'KAME',
+    decimals: 18
+  },
+  rpcUrls: {
+    default: {
+      http: [rpcURLs[ChainId.Kameleon]!]
+    },
+    public: {
+      http: [rpcURLs[ChainId.Kameleon]!]
+    }
+  },
+  blockExplorers: {
+    default: {
+      name: 'Blockscout',
+      url: 'https://explorer-l2-dev.kardiachain.io'
+    }
+  }
+}
+
 export const stylusTestnet: Chain = {
   id: ChainId.StylusTestnet,
   name: 'Stylus Testnet',

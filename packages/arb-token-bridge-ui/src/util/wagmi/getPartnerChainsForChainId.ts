@@ -14,6 +14,7 @@ import {
   chainToWagmiChain,
   stylusTestnet,
   xai,
+  kameleon,
   xaiTestnet,
   localL1Network,
   localL2Network
@@ -53,11 +54,15 @@ export function getPartnerChainsForChainId(chainId: number): Chain[] {
     case ChainId.Xai:
       return [arbitrumOne]
 
+    case ChainId.Kameleon:
+      return [arbitrumSepolia]
+
     case ChainId.ArbitrumGoerli:
       return [goerli, xaiTestnet, ...customArbitrumGoerliChains]
 
     case ChainId.ArbitrumSepolia:
-      return [sepolia, stylusTestnet, ...customArbitrumSepoliaChains]
+      return [kameleon, ...customArbitrumSepoliaChains]
+      // return [sepolia, kameleon, stylusTestnet, ...customArbitrumSepoliaChains]
 
     case ChainId.StylusTestnet:
       return [arbitrumSepolia]

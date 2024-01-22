@@ -11,6 +11,7 @@ import {
   arbitrumSepolia,
   xaiTestnet,
   xai,
+  kameleon,
   stylusTestnet,
   localL1Network as local,
   localL2Network as arbitrumLocal,
@@ -39,6 +40,7 @@ const chainList = isTestingEnvironment
       // Orbit chains
       xaiTestnet,
       xai,
+      kameleon,
       stylusTestnet,
       // add local environments during testing
       local,
@@ -56,6 +58,7 @@ const chainList = isTestingEnvironment
       arbitrumSepolia,
       xaiTestnet,
       xai,
+      kameleon,
       stylusTestnet,
       ...customChains
     ]

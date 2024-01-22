@@ -7,7 +7,8 @@ import { Loader } from '../components/common/atoms/Loader'
 import {
   getCustomChainsFromLocalStorage,
   xaiTestnet,
-  xai
+  xai,
+  kameleon
 } from '../util/networks'
 import { mapCustomChainToNetworkData } from '../util/networks'
 
@@ -62,6 +63,17 @@ export default function Index() {
       addCustomChain({ customChain: xai })
     } catch (error: any) {
       console.error(`Failed to register Xai: ${error.message}`)
+    }
+
+    try {
+      addCustomNetwork({ customL2Network: kameleon })
+    } catch (error: any) {
+      console.error(`Failed to register kameleon: ${error.message}`)
+    }
+    try {
+      addCustomChain({ customChain: kameleon })
+    } catch (error: any) {
+      console.error(`Failed to register kameleon: ${error.message}`)
     }
   }, [])
 
